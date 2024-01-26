@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+$uiBackgroundColor: rgba(10, 10, 10, 0.1);
+$borderInactiveColor: rgba(70, 70, 70, 0.1);
+$sbItemHoverBackgroundColor: rgba(255, 255, 255, 0.5);
+$sbItemHoverBorderColor: rgba(0, 255, 255, 0.5);
+$sbSearchBorderColor: rgba(40, 40, 40, 0.1);
+$sbSearchBoxBackground: rgba(80, 80, 80, 0.2);
+$defaultFontColor: white;
 
 * {
   margin: 0;
@@ -6,32 +13,148 @@
   font-weight: 700;
 }
 
-#ui {
-  z-index: 20;
+.debugDiv {
   position: absolute;
-  color: white;
+  right: 0;
+  top: 0;
+  width: 100px;
+  height: 200px;
+  background-color: $uiBackgroundColor;
+  border: 2px solid red;
+  backdrop-filter: blur(10px);
 }
 
 #app {
   position: absolute;
-  height: 100vh;
   width: 100vw;
-  z-index: 1;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: red;
 }
 
 #app canvas {
   position: absolute;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
 }
 
-.debugDiv {
-  background-color: white;
-  color: black;
-  padding: 4px;
-  margin: 0;
-  position: relative;
-  font-size: 12px;
+#ui {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  pointer-events: none;
+  color: $defaultFontColor;
 }
+
+#sidebar {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: stretch;
+  pointer-events: auto;
+  position: absolute;
+  min-width: 200px;
+  max-width: 20vw;
+  height: 100vh;
+  background-color: $uiBackgroundColor;
+  backdrop-filter: blur(10px);
+}
+
+.sb--item {
+  margin-right: 4px;
+  margin-left: 4px;
+  margin-top: 4px;
+
+  height: auto;
+  overflow: scroll;
+  padding: 2px;
+  transition: all 0.2s ease;
+}
+
+.hov {
+  outline: 1px solid $borderInactiveColor;
+}
+.hov:hover {
+  background-color: black;
+  outline: 1px solid $sbItemHoverBorderColor;
+  opacity: 1;
+}
+
+/* SEARCH */
+.searchContainer {
+  display: grid;
+  grid-template-columns: auto 4fr;
+  grid-template-rows: 1fr;
+  gap: 0 0;
+  grid-template-areas: "SearchLabel SearchInput";
+}
+
+.searchInput {
+  grid-area: SearchInput;
+  background-color: $sbSearchBoxBackground;
+  border: none;
+  outline: 1px solid $sbSearchBorderColor;
+}
+.searchInput:focus {
+  outline: 1px solid $sbItemHoverBorderColor;
+}
+
+.searchLabel {
+  grid-area: SearchLabel;
+}
+.searchButton {
+  grid-area: SearchButton;
+}
+
+.sbheader {
+  min-height: 70px;
+  font-size: 28px;
+}
+
+
+
+
+
+/* CSS2DRenderer */
+.cssFrom3d {
+  background-color: transparent;
+}
+
+.label {
+  transition:
+          background-color 0.5s ease,
+          opacity 0.5s ease,
+          color 0.5s ease,
+          outline-color 0.5s ease;
+  color: white;
+  opacity: 0.5;
+  padding: 5px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.label:hover {
+  background-color: black;
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .basicDiv {
   width: 400px;
@@ -49,5 +172,5 @@
 .basicDiv .scaledImg {
   max-width: 100%;
   max-height: 100%;
-  opacity: 10%
+  opacity: 10%;
 }

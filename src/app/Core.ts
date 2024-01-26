@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import {throttle} from "./utils.ts";
 import {RaycastLogicHandler} from "./RaycastGroup.ts";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js";
 import {AnimationHandler} from "./AnimationHandler.ts";
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 export default class Core {
     constructor(
@@ -13,7 +14,6 @@ export default class Core {
         this.debugElems = debugElems;
         this.camera = new THREE.PerspectiveCamera();
         this.renderer = new THREE.WebGLRenderer({antialias: true});
-        // this.scene = new THREE.Scene();
         this.lights = <THREE.Light[]>[];
         this.uiRoot = uiRoot;
         this.appRoot = appRoot;
@@ -24,9 +24,11 @@ export default class Core {
         this.currentIntersections = [];
         this.initScene();
         this.initRenderer();
+        this.initCSSRenderer();
         this.initCamera();
         this.initMouse();
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
         this.controls.enabled = true;
         this.raycastLogicHandler = new RaycastLogicHandler(this);
         this.animationHandler = new AnimationHandler(this);
@@ -44,6 +46,7 @@ export default class Core {
     camera: THREE.PerspectiveCamera;
     scene!: THREE.Scene;
     renderer: THREE.WebGLRenderer;
+    labelRenderer!: CSS2DRenderer;
     uiRoot: HTMLElement;
     appRoot: HTMLElement;
     raycaster: THREE.Raycaster;
@@ -53,13 +56,14 @@ export default class Core {
     fxaa: boolean;
 
     initCamera() {
-        this.camera.fov = 90;
+        this.camera.fov = 45;
         this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.near = 0.0001;
-        this.camera.far = 1000;
+        this.camera.near = 1;
+        this.camera.far = 50000000;
         this.camera.updateProjectionMatrix();
-        this.camera.position.set(0, 0, 10);
-        // this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        this.camera.position.set(20, 20, 20);
+        this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        this.camera.layers.enableAll(); // TODO: fix this.
 
         // this.camera.layers.enableAll();
 
@@ -91,6 +95,17 @@ export default class Core {
         this.renderer.outputColorSpace = THREE.SRGBColorSpace;
         window.addEventListener('resize', () => {
             this.renderer.setSize(window.innerWidth, window.innerHeight);
+        })
+    }
+
+    initCSSRenderer() {
+        this.labelRenderer = new CSS2DRenderer;
+        this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
+        this.labelRenderer.domElement.style.position = 'absolute';
+        this.labelRenderer.domElement.classList.add('labelRenderer');
+        this.appRoot.appendChild(this.labelRenderer.domElement);
+        window.addEventListener('resize', () => {
+            this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
         })
     }
 
