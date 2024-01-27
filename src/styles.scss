@@ -128,15 +128,16 @@ $defaultFontColor: white;
           opacity 0.5s ease,
           color 0.5s ease,
           outline-color 0.5s ease;
-  color: white;
-  opacity: 0.5;
+  color: gray;
+  opacity: 1;
   padding: 5px;
   border-radius: 10px;
-  backdrop-filter: blur(10px);
 }
 
 .label:hover {
-  background-color: black;
+  color: lightyellow;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
   opacity: 1;
 }
 

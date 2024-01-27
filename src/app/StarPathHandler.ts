@@ -43,7 +43,7 @@ export class StarPath extends THREE.Line {
         this.points.push(fromCB.position);
         this.points.push(toCB.position);
         this.geometry = new THREE.BufferGeometry().setFromPoints(this.points);
-        this.material = new THREE.LineBasicMaterial({color: 0xaaaaaa, opacity: 0.05, linewidth: 100});
+        this.material = new THREE.LineBasicMaterial({color: 0x777777, opacity: 0.05, linewidth: 100});
         this.addToScene();
     }
 
@@ -51,3 +51,20 @@ export class StarPath extends THREE.Line {
         this.spHandler.pathGroup.add(this);
     }
 }
+
+// export class StarPathCyl extends THREE.Mesh {
+//     spHandler: StarPathHandler;
+//     fromCB: CelestialBody;
+//     toCB: CelestialBody;
+//     dist: number;
+//     constructor(fromCB: CelestialBody, toCB: CelestialBody, spHandler: StarPathHandler) {
+//         super();
+//         // Calculate cyl length.
+//         this.dist = Math.abs((toCB.position.clone().sub(fromCB.position.clone()).length()));
+//         this.geometry = new THREE.CylinderGeometry(0.1, 0.1, this.dist, 3, 1, false);
+//     }
+//
+//     addToScene() {
+//         this.spHandler.pathGroup.add(this);
+//     }
+// }

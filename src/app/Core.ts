@@ -13,7 +13,7 @@ export default class Core {
     ) {
         this.debugElems = debugElems;
         this.camera = new THREE.PerspectiveCamera();
-        this.renderer = new THREE.WebGLRenderer({antialias: true});
+        this.renderer = new THREE.WebGLRenderer({antialias: false});
         this.lights = <THREE.Light[]>[];
         this.uiRoot = uiRoot;
         this.appRoot = appRoot;
@@ -79,7 +79,7 @@ export default class Core {
         // this.scene.background = new THREE.Color(0x000000);
 
         // TODO: Ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 10);
         ambientLight.name = 'ambientLight';
         this.scene.add(ambientLight);
 

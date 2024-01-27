@@ -43,11 +43,11 @@ export class ObjectTree extends THREE.Group{
         // core: Core, name: string, pos: [number, number, number], args?: CBAttributes
         // TODO: Implement database instead of hardcode.
         let configs = [
-            {name: 'Star1', pos: [-4, 0, 4], oid: 1},
-            {name: 'Star2', pos: [-8, 0, -5], oid: 2},
-            {name: 'Star3', pos: [4, 0, -4], oid: 3},
-            {name: 'Star4', pos: [8, 0, 2], oid: 4},
-            {name: 'Star5', pos: [0, 0, 7], oid: 5},
+            {name: 'Star1', pos: [-4, 5, 4], oid: 1},
+            {name: 'Star2', pos: [-8, -5, -5], oid: 2},
+            {name: 'Star3', pos: [4, 3, -4], oid: 3},
+            {name: 'Star4', pos: [8, 1, 2], oid: 4},
+            {name: 'Star5', pos: [0, -7, 7], oid: 5},
         ];
         configs.forEach((v) => {
             let cb = new CelestialBody(null, null, v.name, String(v.oid), v.pos as [number, number, number], this.core, 1);
