@@ -9,6 +9,7 @@ export class ObjectTree extends THREE.Group{
     core: Core;
     starGroup: THREE.Group;
     pathGroup: THREE.Group;
+    // uiGroup: THREE.Group;
     starPathHandler: StarPathHandler;
     constructor(core: Core) {
         super();
@@ -31,7 +32,15 @@ export class ObjectTree extends THREE.Group{
         pathGroup.name = 'pathGroup';
         this.add(pathGroup);
 
-        return [starGroup, pathGroup];
+        const uiGroup = new THREE.Group();
+        uiGroup.name = 'uiGroup';
+        this.add(uiGroup);
+
+        return [starGroup, pathGroup, uiGroup];
+    }
+
+    setupUIGroup() {
+        
     }
 
     setupStarGroup() {
@@ -64,8 +73,8 @@ export class ObjectTree extends THREE.Group{
         // TODO: Implement database instead of hardcode.
         let configs = [
             {oid: "1", conns: ["2", "3"]},
-            {oid: "2", conns: ["4", "5"]},
-            {oid: "3", conns: ["2", "1", "3"]}
+            {oid: "2", conns: ["5"]},
+            {oid: "3", conns: ["4"]}
         ];
         let cbs = <CelestialBody[]>this.starGroup.children;  // Get all stars.
 

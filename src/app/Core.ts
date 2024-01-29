@@ -4,6 +4,14 @@ import {RaycastLogicHandler} from "./RaycastGroup.ts";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js";
 import {AnimationHandler} from "./AnimationHandler.ts";
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import {CelestialBody} from "./objects/CelestialObject.js";
+import {Focus} from "./Focus.js";
+
 
 export default class Core {
     constructor(
@@ -32,11 +40,14 @@ export default class Core {
         this.controls.enabled = true;
         this.raycastLogicHandler = new RaycastLogicHandler(this);
         this.animationHandler = new AnimationHandler(this);
+        this.focus = new Focus(this);
 
         // Mark init as complete. Can begin refreshing.
         this.initialized = true;
+
     }
 
+    focus: Focus;
     animationHandler: AnimationHandler;
     controls: OrbitControls;
     currentIntersections: Array<THREE.Intersection<THREE.Object3D>>;
@@ -79,7 +90,7 @@ export default class Core {
         // this.scene.background = new THREE.Color(0x000000);
 
         // TODO: Ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         ambientLight.name = 'ambientLight';
         this.scene.add(ambientLight);
 
@@ -89,7 +100,6 @@ export default class Core {
         // Config
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.appRoot.appendChild(this.renderer.domElement);
         this.renderer.outputColorSpace = THREE.SRGBColorSpace;

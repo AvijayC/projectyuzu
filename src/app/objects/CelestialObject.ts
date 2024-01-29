@@ -5,7 +5,7 @@ import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer
 export class CelestialBody extends THREE.Mesh {
     connections: CelestialBody[];
     uniconnections: CelestialBody[];
-    cbModel: THREE.Mesh;
+    cbModel!: THREE.Mesh;
     oid: String;
     core: Core;
     radius: number;
@@ -32,6 +32,7 @@ export class CelestialBody extends THREE.Mesh {
         this.uniconnections = <CelestialBody[]>[];
         this.generateCBModel();
         this.addTextLabel();
+        this.generateCBModel();
     }
 
     checkIfConnectionExistsHere(conn: CelestialBody) {
@@ -51,12 +52,15 @@ export class CelestialBody extends THREE.Mesh {
         labelLabel.position.set(1.5 * this.radius, 0, 0);
         labelLabel.center.set(0, 1);
         this.add(labelLabel);
-        labelLabel.layers.set(0);
+        // labelLabel.layers.set(0);
         console.log(`Label set for ${this.name}. `, labelDiv, labelLabel);
     }
 
     generateCBModel() {
-        // let mat = new THREE.
+        let mat = new THREE.MeshBasicMaterial({color: 0xffff00});
+        let geo = new THREE.SphereGeometry(this.radius * 0.2);
+        this.cbModel = new THREE.Mesh(geo, mat);
+        this.add(this.cbModel);
     }
 
 }

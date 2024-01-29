@@ -4,7 +4,6 @@ import * as THREE from "three";
 import {Clock} from "three";
 import BasicStars from "./app/objects/BasicStars.ts";
 import {ObjectTree} from "./app/ObjectTree.ts";
-import Stats from 'three/examples/jsm/libs/stats.module';
 
 export const mixerList = <THREE.AnimationMixer[]>[];
 const uiRoot = document.getElementById('ui')!;

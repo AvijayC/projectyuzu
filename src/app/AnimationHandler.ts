@@ -1,6 +1,7 @@
 import Core from "./Core.ts";
 import * as THREE from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
+import {CelestialBody} from "./objects/CelestialObject.js";
 
 export class AnimationHandler {
     constructor(core: Core) {
@@ -51,10 +52,9 @@ export class AnimationHandler {
                 console.log('Finished move anim.');
             })
             .start();
-    }
-    
-    setupTwinkleStars() {
 
+        // Update focus.
+        this.core.focus.updateCB(<CelestialBody>this.core.raycastLogicHandler.firstCBIntersection.object);
     }
 
     update() {

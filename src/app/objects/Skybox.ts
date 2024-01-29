@@ -1,5 +1,10 @@
 import * as THREE from 'three';
-import image from '../../assets/OpenGameArt_StumpyStrust_Skybox/back.png';
+import sbright from '../../assets/OpenGameArt_StumpyStrust_Skybox/right.png';
+import sbleft from '../../assets/OpenGameArt_StumpyStrust_Skybox/left.png';
+import sbtop from '../../assets/OpenGameArt_StumpyStrust_Skybox/top.png';
+import sbbot from '../../assets/OpenGameArt_StumpyStrust_Skybox/bot.png';
+import sbfront from '../../assets/OpenGameArt_StumpyStrust_Skybox/front.png';
+import sbback from '../../assets/OpenGameArt_StumpyStrust_Skybox/back.png';
 
 
 export class Skybox extends THREE.Mesh {
@@ -12,15 +17,14 @@ export class Skybox extends THREE.Mesh {
         this.receiveShadow = false;
         this.name = 'Skybox';
         console.log('Init skybox.');
-        console.log('Image: ', image);
     }
 
     createSkyboxMaterial(colorVal: number = 0.01) {
-        let sides = ['right', 'left', 'top', 'bot', 'front', 'back'];
+        let sides = [sbright, sbleft, sbtop, sbbot, sbfront, sbback];
         const basePath = 'src/assets/OpenGameArt_StumpyStrust_Skybox/';
         return sides.map((x) => {
             console.log('Path: ', basePath + x + '.png');
-            let texture = new THREE.TextureLoader().load(basePath + x + '.png', undefined, undefined,
+            let texture = new THREE.TextureLoader().load(x, undefined, undefined,
                 (e) => {
                     console.error(e)
                 });
