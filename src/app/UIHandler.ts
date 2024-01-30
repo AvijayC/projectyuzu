@@ -5,7 +5,7 @@ import Core from "./Core.js";
 export class UIHandler {
     core: Core;
     constructor(core: Core) {
-        this.core = Core;
+        this.core = core;
     }
 
     initSidebar() {
