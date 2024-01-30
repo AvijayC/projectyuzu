@@ -70,8 +70,23 @@ $defaultFontColor: white;
   backdrop-filter: blur(20px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 600px) {
   #sidebar {
+    visibility: hidden;
+    display: none;
+  }
+  #systemcontainer {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  #sidebar {
+    visibility: hidden;
+    display: none;
+  }
+  #systemcontainer {
     visibility: hidden;
     display: none;
   }
