@@ -70,6 +70,13 @@ $defaultFontColor: white;
   backdrop-filter: blur(20px);
 }
 
+@media screen and (max-width: 600px) {
+  #sidebar {
+    visibility: hidden;
+    display: none;
+  }
+}
+
 .sb--item {
   margin-right: 4px;
   margin-left: 4px;
