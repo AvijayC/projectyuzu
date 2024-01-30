@@ -11,7 +11,7 @@ export class AnimationHandler {
     core: Core;
 
     // Animating the camera.
-    onClickStar(_e: MouseEvent) {
+    onClickStar(_e: MouseEvent | TouchEvent) {
         // Check if intersection has a CB object as first elem.
         if (!this.core.raycastLogicHandler.firstCBIntersection || this.core.controls.enabled == false)
         {console.log('No CB intersect found.'); return;}
@@ -65,5 +65,6 @@ export class AnimationHandler {
     // Setup event handlers.
     setupEventHandlers() {
         window.addEventListener('click', (e) => {this.onClickStar(e); console.log(e.target);})
+        window.addEventListener('touchend', (e) => {this.onClickStar(e); console.log(e.target);})
     }
 }
