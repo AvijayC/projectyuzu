@@ -12,8 +12,8 @@ export class UIHandler {
     }
 
     initSidebar() {
-        this.sidebar = document.getElementById("sidebar");
-        this.sidebarBtn = document.getElementById("sidebarBtn");
+        this.sidebar = document.getElementById("sidebar")!;
+        this.sidebarBtn = document.getElementById("sidebarBtn")!;
     }
 
     onSearchEnter() {
