@@ -38,6 +38,8 @@ export default class Core {
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls = new OrbitControls(this.camera, this.labelRenderer.domElement);
         this.controls.enabled = true;
+        this.controls.minDistance = 34;
+        this.controls.maxDistance = 170;
         this.raycastLogicHandler = new RaycastLogicHandler(this);
         this.animationHandler = new AnimationHandler(this);
         this.focus = new Focus(this);
@@ -135,6 +137,7 @@ export default class Core {
 
         // Refresh raycaster in RaycastGroup.
         this.raycastLogicHandler.update();
+        // console.log('Orbitcontrols zooms: ', this.controls.zoom0, this.controls.minZoom, this.controls.maxZoom, this.controls.getAzimuthalAngle(), this.controls.getDistance());
     }
 
     update() {
