@@ -32,7 +32,7 @@ export class CelestialBody extends THREE.Mesh {
         this.connections = <CelestialBody[]>[];
         this.uniconnections = <CelestialBody[]>[];
         this.generateCBModel();
-        // this.addTextLabel();
+        this.addTextLabel();
         this.generateCBModel();
     }
 
