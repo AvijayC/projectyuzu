@@ -8,12 +8,14 @@ import {StarPathHandler} from "./StarPathHandler.ts";
 export class ObjectTree extends THREE.Group{
     core: Core;
     starGroup: THREE.Group;
+    cbList!: CelestialBody[];
     pathGroup: THREE.Group;
     // uiGroup: THREE.Group;
     starPathHandler: StarPathHandler;
     configs!: [];
     constructor(core: Core) {
         super();
+        this.cbList = <CelestialBody[]>[];
         this.core = core;
         this.name = 'MAIN';
         [this.starGroup, this.pathGroup] = this.setupFirstLayer();
@@ -57,6 +59,7 @@ export class ObjectTree extends THREE.Group{
             let cb = new CelestialBody(null, null, v.name, String(v.oid), v.pos as [number, number, number], this.core, 1);
             // @ts-ignore
             searchRes.add(cb);
+            this.cbList.push(cb);
         })
     }
 
@@ -108,10 +111,6 @@ export class ObjectTree extends THREE.Group{
     setupSkybox() {
         const skybox = new Skybox();
         this.add(skybox);
-    }
-
-    setupStarVector() {
-        // TODO: Implement connections between stars.
     }
 
     hardcodedStars() {

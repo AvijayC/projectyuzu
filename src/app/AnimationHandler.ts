@@ -59,6 +59,7 @@ export class AnimationHandler {
 
     update() {
         // FRAMELOOP: Runs every frame.
+
     }
 
     // Setup event handlers.

@@ -8,6 +8,7 @@ export class CelestialBody extends THREE.Mesh {
     cbModel!: THREE.Mesh;
     oid: String;
     core: Core;
+    labelLabel: CSS2DObject | undefined;
     radius: number;
 
     constructor(geo: THREE.BufferGeometry | null,
@@ -31,7 +32,7 @@ export class CelestialBody extends THREE.Mesh {
         this.connections = <CelestialBody[]>[];
         this.uniconnections = <CelestialBody[]>[];
         this.generateCBModel();
-        this.addTextLabel();
+        // this.addTextLabel();
         this.generateCBModel();
     }
 
@@ -47,13 +48,20 @@ export class CelestialBody extends THREE.Mesh {
     addTextLabel() {
         const labelDiv = document.createElement('div');
         labelDiv.classList.add('label', 'cssFrom3d', 'celestialBody');
+        labelDiv.id = "CBLabel" + <string>this.oid;
         labelDiv.textContent = this.name;
         const labelLabel = new CSS2DObject(labelDiv);
         labelLabel.position.set(1.5 * this.radius, 0, 0);
         labelLabel.center.set(0, 1);
         this.add(labelLabel);
+        this.labelLabel = labelLabel;
         // labelLabel.layers.set(0);
         console.log(`Label set for ${this.name}. `, labelDiv, labelLabel);
+    }
+
+    removeTextLabel() {
+        if (this.labelLabel === undefined) {return;}
+        this.remove(this.labelLabel);
     }
 
     generateCBModel() {
